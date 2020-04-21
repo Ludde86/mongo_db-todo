@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class App extends Component {
+	// @todo - migrate to react hooks
 	// initialize our state
 	state = {
 		data: [],
