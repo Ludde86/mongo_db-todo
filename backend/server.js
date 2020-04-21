@@ -11,7 +11,8 @@ app.use(cors());
 const router = express.Router();
 
 // mongo db
-const dbRoute = 'mongodb://<your-db-username-here>:<your-db-password-here>@ds249583.mlab.com:49583/fullstack_app';
+// const dbRoute = 'mongodb://<your-db-username-here>:<your-db-password-here>@ds249583.mlab.com:49583/fullstack_app';
+const dbRoute = 'mongodb://mongodb+srv://ludde123:<ludde123>@todo-8vzsg.mongodb.net/test?retryWrites=true&w=majority';
 
 // connect backend with database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
