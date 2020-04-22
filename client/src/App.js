@@ -6,12 +6,12 @@ const App = () => {
 	// initialize our state
 	const [ data, setData ] = useState([]);
 	// const [ id, setId ] = useState(0);
-	const [ message, setMessage ] = useState(null);
+	const [ message, setMessage ] = useState('');
 	const [ intervalIsSet, setIntervalIsSet ] = useState(false);
-	const [ idToDelete, setIdToDelete ] = useState(null);
-	const [ idToUpdate, setIdToUpdate ] = useState(null);
+	const [ idToDelete, setIdToDelete ] = useState('');
+	const [ idToUpdate, setIdToUpdate ] = useState('');
 	// const [ updateToApply, setUpdateToApply ] = useState(null);
-	const [ objectToUpdate, setObjectToUpdate ] = useState(null);
+	const [ objectToUpdate, setObjectToUpdate ] = useState('');
 
 	// when component mounts, first thing it does is fetch all existing data in our db
 	// then we incorporate a polling logic so that we can easily see if our db has
@@ -51,6 +51,8 @@ const App = () => {
 			id: idToBeAdded,
 			message: message
 		});
+
+		setMessage('');
 	};
 
 	// our delete method that uses our backend api
@@ -70,6 +72,8 @@ const App = () => {
 				id: objIdToDelete
 			}
 		});
+
+		setIdToDelete('');
 	};
 
 	// our update method that uses our backend api
@@ -88,6 +92,8 @@ const App = () => {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
+		setIdToUpdate('');
+		setObjectToUpdate('');
 	};
 
 	return (
@@ -109,6 +115,8 @@ const App = () => {
 				<input
 					type="text"
 					onChange={(e) => setMessage(e.target.value)}
+					name="message"
+					value={message}
 					placeholder="add something in the database"
 					style={{ width: '200px' }}
 				/>
@@ -117,6 +125,8 @@ const App = () => {
 			<div style={{ padding: '10px' }}>
 				<input
 					type="text"
+					name="idToDelete"
+					value={idToDelete}
 					style={{ width: '200px' }}
 					onChange={(e) => setIdToDelete(e.target.value)}
 					placeholder="put id of item to delete here"
@@ -126,12 +136,16 @@ const App = () => {
 			<div style={{ padding: '10px' }}>
 				<input
 					type="text"
+					name="idToUpdate"
+					value={idToUpdate}
 					style={{ width: '200px' }}
 					onChange={(e) => setIdToUpdate(e.target.value)}
 					placeholder="id of item to update here"
 				/>
 				<input
 					type="text"
+					name="objectToUpdate"
+					value={objectToUpdate}
 					style={{ width: '200px' }}
 					onChange={(e) => setObjectToUpdate(e.target.value)}
 					placeholder="put new value of the item here"
