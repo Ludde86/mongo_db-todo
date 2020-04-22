@@ -35,7 +35,7 @@ const App = () => {
 	// our first get method that uses our backend api to
 	// fetch data from our data base
 	const getDataFromDb = () => {
-		fetch('http://localhost:3001/api/getData').then((data) => data.json()).then((res) => setData(res.data));
+		fetch('/api/getData').then((data) => data.json()).then((res) => setData(res.data));
 	};
 
 	// our put method that uses our backend api
@@ -47,7 +47,7 @@ const App = () => {
 			++idToBeAdded;
 		}
 
-		axios.post('http://localhost:3001/api/putData', {
+		axios.post('/api/putData', {
 			id: idToBeAdded,
 			message: message
 		});
@@ -65,7 +65,7 @@ const App = () => {
 			}
 		});
 
-		axios.delete('http://localhost:3001/api/deleteData', {
+		axios.delete('/api/deleteData', {
 			data: {
 				id: objIdToDelete
 			}
@@ -84,15 +84,11 @@ const App = () => {
 			}
 		});
 
-		axios.post('http://localhost:3001/api/updateData', {
+		axios.post('/api/updateData', {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
 	};
-
-	// here is our UI
-	// it is easy to understand their functions when you
-	// see them render into our screen
 
 	return (
 		<div>
