@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TodoForm from './components/todo/TodoForm';
+import TodoList from './components/todo/TodoList';
 
 const App = () => {
 	// @todo - migrate to react hooks
@@ -83,26 +84,13 @@ const App = () => {
 
 	return (
 		<div>
-			<ul>
-				{todos.length <= 0 ? (
-					'NO DB ENTRIES YET'
-				) : (
-					todos.map((todo) => (
-						<li style={{ padding: '10px' }} key={todo.id}>
-							<span style={{ color: 'gray' }}> todo: </span>
-							{todo.message}
-							<button onClick={() => deleteFromDB(todo.id)}>DELETE</button>
-							<input
-								type="text"
-								style={{ width: '200px' }}
-								onChange={(e) => setObjectToUpdate(e.target.value)}
-								placeholder="update data"
-							/>
-							<button onClick={() => updateDB(todo.id, objectToUpdate)}>UPDATE</button>
-						</li>
-					))
-				)}
-			</ul>
+			<TodoList
+				todos={todos}
+				deleteFromDB={deleteFromDB}
+				setObjectToUpdate={setObjectToUpdate}
+				updateDB={updateDB}
+				objectToUpdate={objectToUpdate}
+			/>
 			<TodoForm todos={todos} message={message} setMessage={setMessage} />
 		</div>
 	);
