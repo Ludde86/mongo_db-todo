@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import TodoItem from './TodoItem';
+import TodoContext from '../../context/todo/todoContext';
 
-const TodoList = ({ todos, deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
+const TodoList = () => {
+	const todoContext = useContext(TodoContext);
+
+	const { todos, getDataFromDb, intervalIsSet, setIntervalIsSet } = todoContext;
+
+	useEffect(
+		() => {
+			getDataFromDb();
+			if (!intervalIsSet) {
+				let interval = setInterval(getDataFromDb, 1000);
+				setIntervalIsSet(interval);
+			}
+		},
+		// eslint-disable-next-line
+		[ intervalIsSet ]
+	);
+
 	return (
 		<ul>
 			{todos.length <= 0 ? (
@@ -9,13 +26,7 @@ const TodoList = ({ todos, deleteFromDB, setObjectToUpdate, updateDB, objectToUp
 			) : (
 				todos.map((todo) => (
 					<div key={todo.id}>
-						<TodoItem
-							todo={todo}
-							deleteFromDB={deleteFromDB}
-							setObjectToUpdate={setObjectToUpdate}
-							updateDB={updateDB}
-							objectToUpdate={objectToUpdate}
-						/>
+						<TodoItem todo={todo} />
 					</div>
 				))
 			)}

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import TodoContext from '../../context/todo/todoContext';
 
-const TodoForm = ({ message, setMessage, putDataToDB }) => {
+const TodoForm = () => {
+	const todoContext = useContext(TodoContext);
+	const { message, setMessage, putDataToDB } = todoContext;
 	return (
 		<div style={{ padding: '10px' }}>
 			<form onSubmit={() => putDataToDB(message)}>

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import TodoContext from '../../context/todo/todoContext';
 
-const TodoItem = ({ todo, deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
+const TodoItem = ({ todo }) => {
+	const todoContext = useContext(TodoContext);
+	const { deleteFromDB, setObjectToUpdate, objectToUpdate, updateDB } = todoContext;
 	return (
 		<li style={{ padding: '10px' }}>
 			<span style={{ color: 'gray' }}> todo: </span>
@@ -12,7 +15,7 @@ const TodoItem = ({ todo, deleteFromDB, setObjectToUpdate, updateDB, objectToUpd
 				onChange={(e) => setObjectToUpdate(e.target.value)}
 				placeholder="update data"
 			/>
-			<button onClick={() => updateDB(todo.id, objectToUpdate)}>UPDATE</button>
+			<button onClick={() => updateDB(todo.id, objectToUpdate)}>UPDATE</button> {objectToUpdate}
 		</li>
 	);
 };
