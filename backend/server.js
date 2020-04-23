@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.set('useFindAndModify', false);
-mongoose.set(('useUnifiedTopology', true));
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
@@ -16,7 +14,7 @@ const router = express.Router();
 const dbRoute = 'mongodb+srv://ludde123:ludde123@todo-8vzsg.mongodb.net/test?retryWrites=true&w=majority';
 
 // connects our back end code with the database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
+mongoose.connect(dbRoute, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true });
 
 let db = mongoose.connection;
 

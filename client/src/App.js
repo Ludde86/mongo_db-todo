@@ -4,7 +4,7 @@ import axios from 'axios';
 const App = () => {
 	// @todo - migrate to react hooks
 	// initialize our state
-	const [ data, setData ] = useState([]);
+	const [ todos, setTodos ] = useState([]);
 	// const [ id, setId ] = useState(0);
 	const [ message, setMessage ] = useState('');
 	const [ intervalIsSet, setIntervalIsSet ] = useState(false);
@@ -35,13 +35,13 @@ const App = () => {
 	// our first get method that uses our backend api to
 	// fetch data from our data base
 	const getDataFromDb = () => {
-		fetch('/api/getData').then((data) => data.json()).then((res) => setData(res.data));
+		fetch('/api/getData').then((todos) => todos.json()).then((res) => setTodos(res.data));
 	};
 
 	// our put method that uses our backend api
 	// to create new query into our data base
 	const putDataToDB = (message) => {
-		let currentIds = data.map((data) => data.id);
+		let currentIds = todos.map((todo) => todo.id);
 		let idToBeAdded = 0;
 		while (currentIds.includes(idToBeAdded)) {
 			++idToBeAdded;
@@ -60,15 +60,15 @@ const App = () => {
 	const deleteFromDB = (idTodelete) => {
 		// parseInt(idTodelete);
 		let objIdToDelete = null;
-		data.forEach((dat) => {
+		todos.forEach((todo) => {
 			// eslint-disable-next-line
-			if (dat.id == idTodelete) {
-				objIdToDelete = dat._id;
+			if (todo.id == idTodelete) {
+				objIdToDelete = todo._id;
 			}
 		});
 
 		axios.delete('/api/deleteData', {
-			data: {
+			todos: {
 				id: objIdToDelete
 			}
 		});
@@ -81,10 +81,10 @@ const App = () => {
 	const updateDB = (idToUpdate, objectToUpdate) => {
 		let objIdToUpdate = null;
 		parseInt(idToUpdate);
-		data.forEach((dat) => {
+		todos.forEach((todo) => {
 			// eslint-disable-next-line
-			if (dat.id == idToUpdate) {
-				objIdToUpdate = dat._id;
+			if (todo.id == idToUpdate) {
+				objIdToUpdate = todo._id;
 			}
 		});
 
@@ -92,7 +92,6 @@ const App = () => {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
-		// setIdToUpdate('');
 
 		setObjectToUpdate('');
 	};
@@ -100,10 +99,10 @@ const App = () => {
 	return (
 		<div>
 			<ul>
-				{data.length <= 0 ? (
+				{todos.length <= 0 ? (
 					'NO DB ENTRIES YET'
 				) : (
-					data.map((todo) => (
+					todos.map((todo) => (
 						<li style={{ padding: '10px' }} key={todo.id}>
 							<span style={{ color: 'gray' }}> todo: </span>
 							{todo.message}
@@ -131,36 +130,6 @@ const App = () => {
 					/>
 					<input type="submit" value="ADD" />
 				</form>
-			</div>
-			{/* <div style={{ padding: '10px' }}>
-				<input
-					type="text"
-					name="idToDelete"
-					value={idToDelete}
-					style={{ width: '200px' }}
-					onChange={(e) => setIdToDelete(e.target.value)}
-					placeholder="put id of item to delete here"
-				/>
-				<button onClick={() => deleteFromDB(idToDelete)}>DELETE</button>
-			</div> */}
-			<div style={{ padding: '10px' }}>
-				{/* <input
-					type="text"
-					name="idToUpdate"
-					value={idToUpdate}
-					style={{ width: '200px' }}
-					onChange={(e) => setIdToUpdate(e.target.value)}
-					placeholder="id of item to update here"
-				/> */}
-				{/* <input
-					type="text"
-					name="objectToUpdate"
-					value={objectToUpdate}
-					style={{ width: '200px' }}
-					onChange={(e) => setObjectToUpdate(e.target.value)}
-					placeholder="put new value of the item here"
-				/>
-				<button onClick={() => updateDB(idToUpdate, objectToUpdate)}>UPDATE</button> */}
 			</div>
 		</div>
 	);
