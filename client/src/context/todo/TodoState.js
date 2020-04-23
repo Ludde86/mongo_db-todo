@@ -1,9 +1,11 @@
 import React from 'react';
 import { useReducer } from 'react';
+import axios from 'axios';
 import TodoContext from './todoContext';
-import { GET_DATA } from '../types';
+import todoReducer from './todoReducer';
+import { GET_DATA, SET_INTERVAL } from '../types';
 
-const TodoState = () => {
+const TodoState = (props) => {
 	const initialState = {
 		todos: [],
 		message: '',
@@ -12,6 +14,7 @@ const TodoState = () => {
 	};
 
 	const [ state, dispatch ] = useReducer(todoReducer, initialState);
+	const { todos } = state;
 
 	const getDataFromDb = () => {
 		fetch('api/getData').then((todos) => todos.json()).then((res) =>
@@ -21,7 +24,7 @@ const TodoState = () => {
 			})
 		);
 
-		fetch('/api/getData').then((todos) => todos.json()).then((res) => setTodos(res.data));
+		// fetch('/api/getData').then((todos) => todos.json()).then((res) => setTodos(res.data));
 	};
 
 	const putDataToDB = (message) => {
@@ -36,7 +39,7 @@ const TodoState = () => {
 			message: message
 		});
 
-		setMessage('');
+		// setMessage('');
 	};
 
 	const deleteFromDB = (idTodelete) => {
@@ -71,7 +74,14 @@ const TodoState = () => {
 			update: { message: objectToUpdate }
 		});
 
-		setObjectToUpdate('');
+		// setObjectToUpdate('');
+	};
+
+	const setIntervalIsSet = (interval) => {
+		dispatch({
+			type: SET_INTERVAL,
+			payload: interval
+		});
 	};
 
 	return (
@@ -81,7 +91,13 @@ const TodoState = () => {
 				message: state.message,
 				intervalIsSet: state.intervalIsSet,
 				objectToUpdate: state.objectToUpdate,
-				getDataFromDb
+				getDataFromDb,
+				putDataToDB,
+				//setMessage,
+				deleteFromDB,
+				updateDB,
+				// setObjectToUpdate
+				setIntervalIsSet
 			}}
 		>
 			{props.children}

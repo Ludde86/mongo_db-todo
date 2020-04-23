@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import TodoItem from './TodoItem';
+import TodoContext from '../../context/todo/todoContext';
 
-const TodoList = ({ todos, deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
+const TodoList = ({ deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
+	const todoContext = useContext(TodoContext);
+
+	const { todos, getDataFromDb, intervalIsSet, setIntervalIsSet } = todoContext;
+
+	useEffect(
+		() => {
+			getDataFromDb();
+			if (!intervalIsSet) {
+				let interval = setInterval(getDataFromDb, 1000);
+				setIntervalIsSet(interval);
+			}
+		},
+		[ intervalIsSet ]
+	);
+
 	return (
 		<ul>
 			{todos.length <= 0 ? (
