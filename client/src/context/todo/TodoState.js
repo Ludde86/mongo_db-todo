@@ -1,6 +1,7 @@
 import React from 'react';
 import { useReducer } from 'react';
 import TodoContext from './todoContext';
+import { GET_DATA } from '../types';
 
 const TodoState = () => {
 	const initialState = {
@@ -13,6 +14,13 @@ const TodoState = () => {
 	const [ state, dispatch ] = useReducer(todoReducer, initialState);
 
 	const getDataFromDb = () => {
+		fetch('api/getData').then((todos) => todos.json()).then((res) =>
+			dispatch({
+				type: GET_DATA,
+				payload: res.data
+			})
+		);
+
 		fetch('/api/getData').then((todos) => todos.json()).then((res) => setTodos(res.data));
 	};
 
@@ -72,7 +80,8 @@ const TodoState = () => {
 				todos: state.todos,
 				message: state.message,
 				intervalIsSet: state.intervalIsSet,
-				objectToUpdate: state.objectToUpdate
+				objectToUpdate: state.objectToUpdate,
+				getDataFromDb
 			}}
 		>
 			{props.children}
