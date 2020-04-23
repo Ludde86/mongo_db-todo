@@ -11,7 +11,6 @@ const TodoList = ({ todos, deleteFromDB, setObjectToUpdate, updateDB, objectToUp
 					<div key={todo.id}>
 						<TodoItem
 							todo={todo}
-							todos={todos}
 							deleteFromDB={deleteFromDB}
 							setObjectToUpdate={setObjectToUpdate}
 							updateDB={updateDB}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TodoItem = ({ todo, todos, deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
+const TodoItem = ({ todo, deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
 	return (
 		<li style={{ padding: '10px' }}>
 			<span style={{ color: 'gray' }}> todo: </span>
