@@ -44,17 +44,19 @@ const App = () => {
 	// our delete method that uses our backend api
 	// to remove existing database information
 	const deleteFromDB = (idTodelete) => {
+		console.log('idTodelete: ', idTodelete);
 		// parseInt(idTodelete);
 		let objIdToDelete = null;
 		todos.forEach((todo) => {
+			console.log('todo: ', todo);
 			// eslint-disable-next-line
 			if (todo.id == idTodelete) {
 				objIdToDelete = todo._id;
 			}
 		});
-
+		console.log('objIdToDelete: ', objIdToDelete);
 		axios.delete('/api/deleteData', {
-			todos: {
+			data: {
 				id: objIdToDelete
 			}
 		});
