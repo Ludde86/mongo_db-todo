@@ -1,4 +1,4 @@
-import { GET_DATA, SET_INTERVAL, SET_MESSAGE } from '../types';
+import { GET_DATA, SET_INTERVAL, SET_MESSAGE, UPDATE_MESSAGE } from '../types';
 
 export default (state, action) => {
 	switch (action.type) {
@@ -17,6 +17,11 @@ export default (state, action) => {
 			return {
 				...state,
 				message: action.payload
+			};
+		case UPDATE_MESSAGE:
+			return {
+				...state,
+				objectToUpdate: action.payload
 			};
 		default:
 			return state;

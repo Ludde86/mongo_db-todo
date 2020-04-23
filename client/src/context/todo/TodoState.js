@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 import axios from 'axios';
 import TodoContext from './todoContext';
 import todoReducer from './todoReducer';
-import { GET_DATA, SET_INTERVAL, SET_MESSAGE } from '../types';
+import { GET_DATA, SET_INTERVAL, SET_MESSAGE, UPDATE_MESSAGE } from '../types';
 
 const TodoState = (props) => {
 	const initialState = {
@@ -23,8 +23,6 @@ const TodoState = (props) => {
 				payload: res.data
 			})
 		);
-
-		// fetch('/api/getData').then((todos) => todos.json()).then((res) => setTodos(res.data));
 	};
 
 	const putDataToDB = (message) => {
@@ -39,16 +37,12 @@ const TodoState = (props) => {
 			id: idToBeAdded,
 			message: message
 		});
-
-		// setMessage('');
 	};
 
 	const deleteFromDB = (idTodelete) => {
-		// parseInt(idTodelete);
 		let objIdToDelete = null;
 		todos.forEach((todo) => {
-			// eslint-disable-next-line
-			if (todo.id == idTodelete) {
+			if (todo.id === idTodelete) {
 				objIdToDelete = todo._id;
 			}
 		});
@@ -62,10 +56,8 @@ const TodoState = (props) => {
 
 	const updateDB = (idToUpdate, objectToUpdate) => {
 		let objIdToUpdate = null;
-		parseInt(idToUpdate);
 		todos.forEach((todo) => {
-			// eslint-disable-next-line
-			if (todo.id == idToUpdate) {
+			if (todo.id === idToUpdate) {
 				objIdToUpdate = todo._id;
 			}
 		});
@@ -74,8 +66,6 @@ const TodoState = (props) => {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
-
-		// setObjectToUpdate('');
 	};
 
 	const setIntervalIsSet = (interval) => {
@@ -94,7 +84,7 @@ const TodoState = (props) => {
 
 	const setObjectToUpdate = (message) => {
 		dispatch({
-			type: SET_MESSAGE,
+			type: UPDATE_MESSAGE,
 			payload: message
 		});
 	};

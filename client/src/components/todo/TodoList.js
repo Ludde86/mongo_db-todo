@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import TodoItem from './TodoItem';
 import TodoContext from '../../context/todo/todoContext';
 
-const TodoList = ({ deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
+const TodoList = () => {
 	const todoContext = useContext(TodoContext);
 
 	const { todos, getDataFromDb, intervalIsSet, setIntervalIsSet } = todoContext;
@@ -26,7 +26,7 @@ const TodoList = ({ deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate })
 			) : (
 				todos.map((todo) => (
 					<div key={todo.id}>
-						<TodoItem todo={todo} setObjectToUpdate={setObjectToUpdate} objectToUpdate={objectToUpdate} />
+						<TodoItem todo={todo} />
 					</div>
 				))
 			)}
