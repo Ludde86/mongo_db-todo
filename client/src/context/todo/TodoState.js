@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 import axios from 'axios';
 import TodoContext from './todoContext';
 import todoReducer from './todoReducer';
-import { GET_DATA, SET_INTERVAL } from '../types';
+import { GET_DATA, SET_INTERVAL, SET_MESSAGE } from '../types';
 
 const TodoState = (props) => {
 	const initialState = {
@@ -28,6 +28,7 @@ const TodoState = (props) => {
 	};
 
 	const putDataToDB = (message) => {
+		console.log('message: ', message);
 		let currentIds = todos.map((todo) => todo.id);
 		let idToBeAdded = 0;
 		while (currentIds.includes(idToBeAdded)) {
@@ -84,6 +85,20 @@ const TodoState = (props) => {
 		});
 	};
 
+	const setMessage = (message) => {
+		dispatch({
+			type: SET_MESSAGE,
+			payload: message
+		});
+	};
+
+	const setObjectToUpdate = (message) => {
+		dispatch({
+			type: SET_MESSAGE,
+			payload: message
+		});
+	};
+
 	return (
 		<TodoContext.Provider
 			value={{
@@ -93,10 +108,10 @@ const TodoState = (props) => {
 				objectToUpdate: state.objectToUpdate,
 				getDataFromDb,
 				putDataToDB,
-				//setMessage,
+				setMessage,
 				deleteFromDB,
 				updateDB,
-				// setObjectToUpdate
+				setObjectToUpdate,
 				setIntervalIsSet
 			}}
 		>

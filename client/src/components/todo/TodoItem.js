@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import TodoContext from '../../context/todo/todoContext';
 
-const TodoItem = ({ todo, deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
+const TodoItem = ({ todo, objectToUpdate }) => {
+	const todoContext = useContext(TodoContext);
+	const { deleteFromDB, setObjectToUpdate, updateDB } = todoContext;
 	return (
 		<li style={{ padding: '10px' }}>
 			<span style={{ color: 'gray' }}> todo: </span>

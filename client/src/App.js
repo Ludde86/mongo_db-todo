@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import React from 'react';
+
 import TodoForm from './components/todo/TodoForm';
 import TodoList from './components/todo/TodoList';
 import TodoState from './context/todo/TodoState';
 
 const App = () => {
 	// const [ todos, setTodos ] = useState([]);
-	const [ message, setMessage ] = useState('');
-	const [ intervalIsSet, setIntervalIsSet ] = useState(false);
-	const [ objectToUpdate, setObjectToUpdate ] = useState('');
+	// const [ message, setMessage ] = useState('');
+	// const [ intervalIsSet, setIntervalIsSet ] = useState(false);
+	// const [ objectToUpdate, setObjectToUpdate ] = useState('');
 
 	// when component mounts, first thing it does is fetch all existing data in our db
 	// then we incorporate a polling logic so that we can easily see if our db has

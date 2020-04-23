@@ -15,6 +15,7 @@ const TodoList = ({ deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate })
 				setIntervalIsSet(interval);
 			}
 		},
+		// eslint-disable-next-line
 		[ intervalIsSet ]
 	);
 
@@ -25,13 +26,7 @@ const TodoList = ({ deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate })
 			) : (
 				todos.map((todo) => (
 					<div key={todo.id}>
-						<TodoItem
-							todo={todo}
-							deleteFromDB={deleteFromDB}
-							setObjectToUpdate={setObjectToUpdate}
-							updateDB={updateDB}
-							objectToUpdate={objectToUpdate}
-						/>
+						<TodoItem todo={todo} setObjectToUpdate={setObjectToUpdate} objectToUpdate={objectToUpdate} />
 					</div>
 				))
 			)}
