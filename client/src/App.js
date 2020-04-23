@@ -4,14 +4,14 @@ import axios from 'axios';
 const App = () => {
 	// @todo - migrate to react hooks
 	// initialize our state
-	const [ data, setData ] = useState([]);
+	const [ todos, setTodos ] = useState([]);
 	// const [ id, setId ] = useState(0);
-	const [ message, setMessage ] = useState(null);
+	const [ message, setMessage ] = useState('');
 	const [ intervalIsSet, setIntervalIsSet ] = useState(false);
-	const [ idToDelete, setIdToDelete ] = useState(null);
-	const [ idToUpdate, setIdToUpdate ] = useState(null);
+	// const [ idToDelete, setIdToDelete ] = useState('');
+	// const [ idToUpdate, setIdToUpdate ] = useState('');
 	// const [ updateToApply, setUpdateToApply ] = useState(null);
-	const [ objectToUpdate, setObjectToUpdate ] = useState(null);
+	const [ objectToUpdate, setObjectToUpdate ] = useState('');
 
 	// when component mounts, first thing it does is fetch all existing data in our db
 	// then we incorporate a polling logic so that we can easily see if our db has
@@ -35,13 +35,13 @@ const App = () => {
 	// our first get method that uses our backend api to
 	// fetch data from our data base
 	const getDataFromDb = () => {
-		fetch('/api/getData').then((data) => data.json()).then((res) => setData(res.data));
+		fetch('/api/getData').then((todos) => todos.json()).then((res) => setTodos(res.data));
 	};
 
 	// our put method that uses our backend api
 	// to create new query into our data base
 	const putDataToDB = (message) => {
-		let currentIds = data.map((data) => data.id);
+		let currentIds = todos.map((todo) => todo.id);
 		let idToBeAdded = 0;
 		while (currentIds.includes(idToBeAdded)) {
 			++idToBeAdded;
@@ -51,25 +51,29 @@ const App = () => {
 			id: idToBeAdded,
 			message: message
 		});
+
+		setMessage('');
 	};
 
 	// our delete method that uses our backend api
 	// to remove existing database information
 	const deleteFromDB = (idTodelete) => {
-		parseInt(idTodelete);
+		// parseInt(idTodelete);
 		let objIdToDelete = null;
-		data.forEach((dat) => {
+		todos.forEach((todo) => {
 			// eslint-disable-next-line
-			if (dat.id == idTodelete) {
-				objIdToDelete = dat._id;
+			if (todo.id == idTodelete) {
+				objIdToDelete = todo._id;
 			}
 		});
 
 		axios.delete('/api/deleteData', {
-			data: {
+			todos: {
 				id: objIdToDelete
 			}
 		});
+
+		// setIdToDelete('');
 	};
 
 	// our update method that uses our backend api
@@ -77,10 +81,10 @@ const App = () => {
 	const updateDB = (idToUpdate, objectToUpdate) => {
 		let objIdToUpdate = null;
 		parseInt(idToUpdate);
-		data.forEach((dat) => {
+		todos.forEach((todo) => {
 			// eslint-disable-next-line
-			if (dat.id == idToUpdate) {
-				objIdToUpdate = dat._id;
+			if (todo.id == idToUpdate) {
+				objIdToUpdate = todo._id;
 			}
 		});
 
@@ -88,55 +92,44 @@ const App = () => {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
+
+		setObjectToUpdate('');
 	};
 
 	return (
 		<div>
 			<ul>
-				{data.length <= 0 ? (
+				{todos.length <= 0 ? (
 					'NO DB ENTRIES YET'
 				) : (
-					data.map((dat) => (
-						<li style={{ padding: '10px' }} key={dat.id}>
-							<span style={{ color: 'gray' }}> id: </span> {dat.id} <br />
-							<span style={{ color: 'gray' }}> data: </span>
-							{dat.message}
+					todos.map((todo) => (
+						<li style={{ padding: '10px' }} key={todo.id}>
+							<span style={{ color: 'gray' }}> todo: </span>
+							{todo.message}
+							<button onClick={() => deleteFromDB(todo.id)}>DELETE</button>
+							<input
+								type="text"
+								style={{ width: '200px' }}
+								onChange={(e) => setObjectToUpdate(e.target.value)}
+								placeholder="update data"
+							/>
+							<button onClick={() => updateDB(todo.id, objectToUpdate)}>UPDATE</button>
 						</li>
 					))
 				)}
 			</ul>
 			<div style={{ padding: '10px' }}>
-				<input
-					type="text"
-					onChange={(e) => setMessage(e.target.value)}
-					placeholder="add something in the database"
-					style={{ width: '200px' }}
-				/>
-				<button onClick={() => putDataToDB(message)}>ADD</button>
-			</div>
-			<div style={{ padding: '10px' }}>
-				<input
-					type="text"
-					style={{ width: '200px' }}
-					onChange={(e) => setIdToDelete(e.target.value)}
-					placeholder="put id of item to delete here"
-				/>
-				<button onClick={() => deleteFromDB(idToDelete)}>DELETE</button>
-			</div>
-			<div style={{ padding: '10px' }}>
-				<input
-					type="text"
-					style={{ width: '200px' }}
-					onChange={(e) => setIdToUpdate(e.target.value)}
-					placeholder="id of item to update here"
-				/>
-				<input
-					type="text"
-					style={{ width: '200px' }}
-					onChange={(e) => setObjectToUpdate(e.target.value)}
-					placeholder="put new value of the item here"
-				/>
-				<button onClick={() => updateDB(idToUpdate, objectToUpdate)}>UPDATE</button>
+				<form onSubmit={() => putDataToDB(message)}>
+					<input
+						type="text"
+						onChange={(e) => setMessage(e.target.value)}
+						name="message"
+						value={message}
+						placeholder="what to do"
+						style={{ width: '200px' }}
+					/>
+					<input type="submit" value="ADD" />
+				</form>
 			</div>
 		</div>
 	);
