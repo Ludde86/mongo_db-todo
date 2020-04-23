@@ -8,8 +8,8 @@ const App = () => {
 	// const [ id, setId ] = useState(0);
 	const [ message, setMessage ] = useState('');
 	const [ intervalIsSet, setIntervalIsSet ] = useState(false);
-	const [ idToDelete, setIdToDelete ] = useState('');
-	const [ idToUpdate, setIdToUpdate ] = useState('');
+	// const [ idToDelete, setIdToDelete ] = useState('');
+	// const [ idToUpdate, setIdToUpdate ] = useState('');
 	// const [ updateToApply, setUpdateToApply ] = useState(null);
 	const [ objectToUpdate, setObjectToUpdate ] = useState('');
 
@@ -58,7 +58,7 @@ const App = () => {
 	// our delete method that uses our backend api
 	// to remove existing database information
 	const deleteFromDB = (idTodelete) => {
-		parseInt(idTodelete);
+		// parseInt(idTodelete);
 		let objIdToDelete = null;
 		data.forEach((dat) => {
 			// eslint-disable-next-line
@@ -73,7 +73,7 @@ const App = () => {
 			}
 		});
 
-		setIdToDelete('');
+		// setIdToDelete('');
 	};
 
 	// our update method that uses our backend api
@@ -92,7 +92,8 @@ const App = () => {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
-		setIdToUpdate('');
+		// setIdToUpdate('');
+
 		setObjectToUpdate('');
 	};
 
@@ -102,27 +103,36 @@ const App = () => {
 				{data.length <= 0 ? (
 					'NO DB ENTRIES YET'
 				) : (
-					data.map((dat) => (
-						<li style={{ padding: '10px' }} key={dat.id}>
-							<span style={{ color: 'gray' }}> id: </span> {dat.id} <br />
-							<span style={{ color: 'gray' }}> data: </span>
-							{dat.message}
+					data.map((todo) => (
+						<li style={{ padding: '10px' }} key={todo.id}>
+							<span style={{ color: 'gray' }}> todo: </span>
+							{todo.message}
+							<button onClick={() => deleteFromDB(todo.id)}>DELETE</button>
+							<input
+								type="text"
+								style={{ width: '200px' }}
+								onChange={(e) => setObjectToUpdate(e.target.value)}
+								placeholder="update data"
+							/>
+							<button onClick={() => updateDB(todo.id, objectToUpdate)}>UPDATE</button>
 						</li>
 					))
 				)}
 			</ul>
 			<div style={{ padding: '10px' }}>
-				<input
-					type="text"
-					onChange={(e) => setMessage(e.target.value)}
-					name="message"
-					value={message}
-					placeholder="add something in the database"
-					style={{ width: '200px' }}
-				/>
-				<button onClick={() => putDataToDB(message)}>ADD</button>
+				<form onSubmit={() => putDataToDB(message)}>
+					<input
+						type="text"
+						onChange={(e) => setMessage(e.target.value)}
+						name="message"
+						value={message}
+						placeholder="what to do"
+						style={{ width: '200px' }}
+					/>
+					<input type="submit" value="ADD" />
+				</form>
 			</div>
-			<div style={{ padding: '10px' }}>
+			{/* <div style={{ padding: '10px' }}>
 				<input
 					type="text"
 					name="idToDelete"
@@ -132,17 +142,17 @@ const App = () => {
 					placeholder="put id of item to delete here"
 				/>
 				<button onClick={() => deleteFromDB(idToDelete)}>DELETE</button>
-			</div>
+			</div> */}
 			<div style={{ padding: '10px' }}>
-				<input
+				{/* <input
 					type="text"
 					name="idToUpdate"
 					value={idToUpdate}
 					style={{ width: '200px' }}
 					onChange={(e) => setIdToUpdate(e.target.value)}
 					placeholder="id of item to update here"
-				/>
-				<input
+				/> */}
+				{/* <input
 					type="text"
 					name="objectToUpdate"
 					value={objectToUpdate}
@@ -150,7 +160,7 @@ const App = () => {
 					onChange={(e) => setObjectToUpdate(e.target.value)}
 					placeholder="put new value of the item here"
 				/>
-				<button onClick={() => updateDB(idToUpdate, objectToUpdate)}>UPDATE</button>
+				<button onClick={() => updateDB(idToUpdate, objectToUpdate)}>UPDATE</button> */}
 			</div>
 		</div>
 	);

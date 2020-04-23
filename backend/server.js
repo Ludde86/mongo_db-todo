@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
+mongoose.set(('useUnifiedTopology', true));
 const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
