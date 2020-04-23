@@ -1,4 +1,5 @@
 import React from 'react';
+import TodoItem from './TodoItem';
 
 const TodoList = ({ todos, deleteFromDB, setObjectToUpdate, updateDB, objectToUpdate }) => {
 	return (
@@ -7,18 +8,16 @@ const TodoList = ({ todos, deleteFromDB, setObjectToUpdate, updateDB, objectToUp
 				'NO DB ENTRIES YET'
 			) : (
 				todos.map((todo) => (
-					<li style={{ padding: '10px' }} key={todo.id}>
-						<span style={{ color: 'gray' }}> todo: </span>
-						{todo.message}
-						<button onClick={() => deleteFromDB(todo.id)}>DELETE</button>
-						<input
-							type="text"
-							style={{ width: '200px' }}
-							onChange={(e) => setObjectToUpdate(e.target.value)}
-							placeholder="update data"
+					<div key={todo.id}>
+						<TodoItem
+							todo={todo}
+							todos={todos}
+							deleteFromDB={deleteFromDB}
+							setObjectToUpdate={setObjectToUpdate}
+							updateDB={updateDB}
+							objectToUpdate={objectToUpdate}
 						/>
-						<button onClick={() => updateDB(todo.id, objectToUpdate)}>UPDATE</button>
-					</li>
+					</div>
 				))
 			)}
 		</ul>
