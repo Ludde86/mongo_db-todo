@@ -42,3 +42,30 @@
 .del-upd-buttons {
 	width: 25%;
 }
+
+.navbar-container {
+	background-color: black;
+	color: white;
+	margin-bottom: 50px;
+	height: 75px;
+}
+
+.navbar-container li {
+	list-style: none;
+}
+
+.navbar-container a {
+	color: white;
+	text-decoration: none;
+}
+
+.navbar-container a:hover {
+	color: grey;
+}
+
+.navbar-list {
+	height: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
