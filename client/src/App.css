@@ -9,6 +9,10 @@
 	margin: 10px;
 }
 
+.todo-container ul {
+	list-style: none;
+}
+
 .todo-form-container {
 	border: 2px solid green;
 	margin: 10px;
@@ -26,10 +30,6 @@
 
 .todo-item-content {
 	display: flex;
-}
-
-.todo-container ul {
-	list-style: none;
 }
 
 .todo-message {

@@ -24,7 +24,6 @@ const TodoForm = () => {
 						name="objectToUpdate"
 						value={objectToUpdate}
 						placeholder={objectToUpdate}
-						style={{ width: '200px' }}
 					/>
 					<input type="submit" value="UPDATE" />
 				</form>
@@ -36,7 +35,6 @@ const TodoForm = () => {
 						name="message"
 						value={message}
 						placeholder="add todo"
-						style={{ width: '200px' }}
 					/>
 					<input type="submit" value="ADD" />
 				</form>
