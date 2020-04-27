@@ -2,26 +2,27 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-	const routes = [ '', 'home', 'shopping' ];
-	//  const [ routes, setRoutes ] = useState([
-	// 	{
-	// 		name: 'start'
-	// 	},
-	// 	{
-	// 		name: 'home'
-	// 	},
-	// 	{
-	// 		name: 'shopping'
-	// 	}
-	// ]);
+	const [ routes, setRoutes ] = useState([
+		{
+			name: 'Att Göra: ',
+			page: '/'
+		},
+		{
+			name: 'Hemma',
+			page: '/home'
+		},
+		{
+			name: 'Handla',
+			page: '/shopping'
+		}
+	]);
 
 	return (
 		<div className="navbar-list">
 			{routes.map((route) => (
 				<div className="navbar-item">
-					{/* <li to={`/${route}`} >{route}</li> */}
 					<li>
-						<Link to={`/${route}`}>{route}</Link>
+						<Link to={route.page}>{route.name}</Link>
 					</li>
 				</div>
 			))}
