@@ -19,6 +19,7 @@
 	},
 	"homepage": "https://github.com/Ludde86/mongo_db-todo#readme",
 	"dependencies": {
-		"concurrently": "^5.1.0"
+		"concurrently": "^5.1.0",
+		"react-router-dom": "^5.1.2"
 	}
 }
