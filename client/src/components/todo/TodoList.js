@@ -19,19 +19,19 @@ const TodoList = () => {
 		[ intervalIsSet ]
 	);
 
-	return (
-		<ul>
-			{todos.length <= 0 ? (
-				'NO DB ENTRIES YET'
-			) : (
-				todos.map((todo) => (
-					<div key={todo.id}>
+	return todos.map((todo) => {
+		return (
+			<div key={todo.id}>
+				{todos.length <= 0 ? (
+					'NO DB ENTRIES YET'
+				) : (
+					<ul>
 						<TodoItem todo={todo} />
-					</div>
-				))
-			)}
-		</ul>
-	);
+					</ul>
+				)}
+			</div>
+		);
+	});
 };
 
 export default TodoList;

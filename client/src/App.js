@@ -85,8 +85,8 @@ const App = () => {
 
 	return (
 		<TodoState>
-			<TodoList />
 			<TodoForm />
+			<TodoList />
 		</TodoState>
 	);
 };
