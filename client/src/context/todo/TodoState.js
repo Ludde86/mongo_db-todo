@@ -3,14 +3,15 @@ import { useReducer } from 'react';
 import axios from 'axios';
 import TodoContext from './todoContext';
 import todoReducer from './todoReducer';
-import { GET_DATA, SET_INTERVAL, SET_MESSAGE, UPDATE_MESSAGE } from '../types';
+import { GET_DATA, SET_INTERVAL, SET_MESSAGE, UPDATE_MESSAGE, CLEAR_MESSAGE, SET_TRUE, SET_FALSE } from '../types';
 
 const TodoState = (props) => {
 	const initialState = {
 		todos: [],
 		message: '',
 		intervalIsSet: false,
-		objectToUpdate: ''
+		objectToUpdate: '',
+		isEdit: false
 	};
 
 	const [ state, dispatch ] = useReducer(todoReducer, initialState);
@@ -26,7 +27,6 @@ const TodoState = (props) => {
 	};
 
 	const putDataToDB = (message) => {
-		console.log('message: ', message);
 		let currentIds = todos.map((todo) => todo.id);
 		let idToBeAdded = 0;
 		while (currentIds.includes(idToBeAdded)) {
@@ -55,6 +55,7 @@ const TodoState = (props) => {
 	};
 
 	const updateDB = (idToUpdate, objectToUpdate) => {
+		setTrue();
 		let objIdToUpdate = null;
 		todos.forEach((todo) => {
 			if (todo.id === idToUpdate) {
@@ -66,6 +67,10 @@ const TodoState = (props) => {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
+		setFalse();
+		// if (objectToUpdate !== '') {
+		// 	clearMessage();
+		// }
 	};
 
 	const setIntervalIsSet = (interval) => {
@@ -89,6 +94,27 @@ const TodoState = (props) => {
 		});
 	};
 
+	const clearMessage = () => {
+		dispatch({
+			type: CLEAR_MESSAGE,
+			payload: ''
+		});
+	};
+
+	const setTrue = () => {
+		dispatch({
+			type: SET_TRUE,
+			payload: true
+		});
+	};
+
+	const setFalse = () => {
+		dispatch({
+			type: SET_FALSE,
+			payload: false
+		});
+	};
+
 	return (
 		<TodoContext.Provider
 			value={{
@@ -96,13 +122,16 @@ const TodoState = (props) => {
 				message: state.message,
 				intervalIsSet: state.intervalIsSet,
 				objectToUpdate: state.objectToUpdate,
+				isEdit: state.isEdit,
 				getDataFromDb,
 				putDataToDB,
 				setMessage,
 				deleteFromDB,
 				updateDB,
 				setObjectToUpdate,
-				setIntervalIsSet
+				setIntervalIsSet,
+				setTrue,
+				setFalse
 			}}
 		>
 			{props.children}
