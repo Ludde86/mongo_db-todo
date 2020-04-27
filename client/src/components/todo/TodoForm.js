@@ -25,7 +25,7 @@ const TodoForm = () => {
 						value={objectToUpdate}
 						placeholder={objectToUpdate}
 					/>
-					<input type="submit" value="UPDATE" />
+					<input type="submit" value="Uppdatera" />
 				</form>
 			) : (
 				<form onSubmit={() => putDataToDB(message)}>
@@ -34,9 +34,9 @@ const TodoForm = () => {
 						onChange={(e) => setMessage(e.target.value)}
 						name="message"
 						value={message}
-						placeholder="add todo"
+						placeholder="Lägg till att göra"
 					/>
-					<input type="submit" value="ADD" />
+					<input type="submit" value="Lägg till" />
 				</form>
 			)}
 		</div>
