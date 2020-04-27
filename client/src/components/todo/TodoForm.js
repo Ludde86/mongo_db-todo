@@ -3,16 +3,25 @@ import TodoContext from '../../context/todo/todoContext';
 
 const TodoForm = () => {
 	const todoContext = useContext(TodoContext);
-	const { message, setMessage, putDataToDB, isEdit, objectToUpdate, updateDB, todos } = todoContext;
-	console.log('objectToUpdate: ', objectToUpdate);
+	const {
+		message,
+		setMessage,
+		putDataToDB,
+		isEdit,
+		objectToUpdate,
+		setObjectToUpdate,
+		idToUpdate,
+		updateDB
+	} = todoContext;
+
 	return (
 		<div style={{ padding: '10px' }}>
 			{isEdit ? (
-				<form onSubmit={() => updateDB(todos.id, objectToUpdate)}>
+				<form onSubmit={() => updateDB(idToUpdate, objectToUpdate)}>
 					<input
 						type="text"
-						onChange={(e) => setMessage(e.target.value)}
-						name="message"
+						onChange={(e) => setObjectToUpdate(idToUpdate, e.target.value)}
+						name="objectToUpdate"
 						value={objectToUpdate}
 						placeholder={objectToUpdate}
 						style={{ width: '200px' }}

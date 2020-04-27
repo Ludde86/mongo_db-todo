@@ -3,7 +3,16 @@ import { useReducer } from 'react';
 import axios from 'axios';
 import TodoContext from './todoContext';
 import todoReducer from './todoReducer';
-import { GET_DATA, SET_INTERVAL, SET_MESSAGE, UPDATE_MESSAGE, CLEAR_MESSAGE, SET_TRUE, SET_FALSE } from '../types';
+import {
+	GET_DATA,
+	SET_INTERVAL,
+	SET_MESSAGE,
+	UPDATE_MESSAGE,
+	// CLEAR_MESSAGE,
+	SET_ID,
+	SET_TRUE,
+	SET_FALSE
+} from '../types';
 
 const TodoState = (props) => {
 	const initialState = {
@@ -11,6 +20,7 @@ const TodoState = (props) => {
 		message: '',
 		intervalIsSet: false,
 		objectToUpdate: '',
+		idToUpdate: null,
 		isEdit: false
 	};
 
@@ -87,19 +97,27 @@ const TodoState = (props) => {
 		});
 	};
 
-	const setObjectToUpdate = (message) => {
+	const setObjectToUpdate = (id, message) => {
+		setIdToUpdate(id);
 		dispatch({
 			type: UPDATE_MESSAGE,
 			payload: message
 		});
 	};
 
-	const clearMessage = () => {
+	const setIdToUpdate = (id) => {
 		dispatch({
-			type: CLEAR_MESSAGE,
-			payload: ''
+			type: SET_ID,
+			payload: id
 		});
 	};
+
+	// const clearMessage = () => {
+	// 	dispatch({
+	// 		type: CLEAR_MESSAGE,
+	// 		payload: ''
+	// 	});
+	// };
 
 	const setTrue = () => {
 		dispatch({
@@ -122,6 +140,7 @@ const TodoState = (props) => {
 				message: state.message,
 				intervalIsSet: state.intervalIsSet,
 				objectToUpdate: state.objectToUpdate,
+				idToUpdate: state.idToUpdate,
 				isEdit: state.isEdit,
 				getDataFromDb,
 				putDataToDB,
@@ -129,6 +148,7 @@ const TodoState = (props) => {
 				deleteFromDB,
 				updateDB,
 				setObjectToUpdate,
+				setIdToUpdate,
 				setIntervalIsSet,
 				setTrue,
 				setFalse
