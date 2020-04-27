@@ -4,6 +4,8 @@ import TodoForm from './components/todo/TodoForm';
 import TodoList from './components/todo/TodoList';
 import TodoState from './context/todo/TodoState';
 
+import './App.css';
+
 const App = () => {
 	// const [ todos, setTodos ] = useState([]);
 	// const [ message, setMessage ] = useState('');
@@ -84,10 +86,14 @@ const App = () => {
 	// };
 
 	return (
-		<TodoState>
-			<TodoForm />
-			<TodoList />
-		</TodoState>
+		<div className="app-container">
+			<TodoState>
+				<div className="todo-container">
+					<TodoForm />
+					<TodoList />
+				</div>
+			</TodoState>
+		</div>
 	);
 };
 

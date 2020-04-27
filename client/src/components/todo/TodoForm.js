@@ -15,7 +15,7 @@ const TodoForm = () => {
 	} = todoContext;
 
 	return (
-		<div style={{ padding: '10px' }}>
+		<div className="todo-form-container">
 			{isEdit ? (
 				<form onSubmit={() => updateDB(idToUpdate, objectToUpdate)}>
 					<input

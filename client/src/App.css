@@ -1,0 +1,41 @@
+.app-container {
+	border: 5px solid black;
+	width: 50%;
+	margin: auto;
+}
+
+.todo-container {
+	border: 3px solid blue;
+	margin: 10px;
+}
+
+.todo-form-container {
+	border: 2px solid green;
+	margin: 10px;
+	padding: 40px;
+}
+
+.todo-list-container {
+	border: 2px solid red;
+	margin: 10px;
+}
+
+.todo-item-container {
+	border: 1px solid yellow;
+}
+
+.todo-item-content {
+	display: flex;
+}
+
+.todo-container ul {
+	list-style: none;
+}
+
+.todo-message {
+	width: 75%;
+}
+
+.del-upd-buttons {
+	width: 25%;
+}

@@ -5,14 +5,15 @@ const TodoItem = ({ todo }) => {
 	const todoContext = useContext(TodoContext);
 	const { deleteFromDB, setObjectToUpdate } = todoContext;
 	return (
-		<li style={{ padding: '10px' }}>
-			<span style={{ color: 'gray' }}> todo: </span>
-			{todo.message}
+		<li>
+			<div className="todo-item-content">
+				<div className="todo-message"> {todo.message} </div>
 
-			<span>
-				<button onClick={() => deleteFromDB(todo.id)}>DELETE</button>
-				<button onClick={() => setObjectToUpdate(todo.id, todo.message)}>EDIT</button>
-			</span>
+				<div className="del-upd-buttons">
+					<button onClick={() => deleteFromDB(todo.id)}>DELETE</button>
+					<button onClick={() => setObjectToUpdate(todo.id, todo.message)}>EDIT</button>
+				</div>
+			</div>
 		</li>
 	);
 };
