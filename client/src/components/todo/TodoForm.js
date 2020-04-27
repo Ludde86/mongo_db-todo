@@ -15,7 +15,7 @@ const TodoForm = () => {
 	} = todoContext;
 
 	return (
-		<div style={{ padding: '10px' }}>
+		<div className="todo-form-container">
 			{isEdit ? (
 				<form onSubmit={() => updateDB(idToUpdate, objectToUpdate)}>
 					<input
@@ -24,9 +24,8 @@ const TodoForm = () => {
 						name="objectToUpdate"
 						value={objectToUpdate}
 						placeholder={objectToUpdate}
-						style={{ width: '200px' }}
 					/>
-					<input type="submit" value="UPDATE" />
+					<input type="submit" value="Uppdatera" />
 				</form>
 			) : (
 				<form onSubmit={() => putDataToDB(message)}>
@@ -35,10 +34,9 @@ const TodoForm = () => {
 						onChange={(e) => setMessage(e.target.value)}
 						name="message"
 						value={message}
-						placeholder="add todo"
-						style={{ width: '200px' }}
+						placeholder="Lägg till att göra"
 					/>
-					<input type="submit" value="ADD" />
+					<input type="submit" value="Lägg till" />
 				</form>
 			)}
 		</div>
