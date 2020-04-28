@@ -1,7 +1,10 @@
+body {
+	background-color: white;
+}
+
 .app-container {
-	border: 5px solid black;
-	border-radius: 10px;
-	width: 50%;
+	width: 60%;
+	min-height: 550px;
 	margin: auto;
 }
 
@@ -15,19 +18,17 @@
 }
 
 .todo-form-container {
-	border: 2px solid gray;
-	border-radius: 10px;
-	margin: 12px;
-	padding: 38px;
+	border-bottom: 3px solid black;
+	padding: 30px;
 }
 
 .todo-list-container {
+	border-radius: 3px;
 	margin: 10px;
 }
 
 .todo-item-container {
-	border: 2px solid gray;
-	border-radius: 10px;
+	border-bottom: 2px solid gray;
 	margin: 2px;
 }
 
@@ -44,8 +45,8 @@
 }
 
 .navbar-container {
-	background-color: black;
-	color: white;
+	background-color: white;
+	border-bottom: 3px solid black;
 	margin-bottom: 50px;
 	height: 75px;
 }
@@ -55,7 +56,7 @@
 }
 
 .navbar-container a {
-	color: white;
+	color: black;
 	text-decoration: none;
 }
 
