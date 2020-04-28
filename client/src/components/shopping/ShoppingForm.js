@@ -4,7 +4,11 @@ import axios from 'axios';
 const ShoppingForm = () => {
 	const [ message, setMessage ] = useState('');
 	const postShopping = async () => {
-		await axios.post('/postShopping');
+		try {
+			await axios.post('/postShopping');
+		} catch (error) {
+			console.error(error);
+		}
 	};
 	return (
 		<form onSubmit={postShopping}>
