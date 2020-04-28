@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const ShoppingSchema = new Schema(
 	{
-		id: Number,
 		message: String
 	},
 	{

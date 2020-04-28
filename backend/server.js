@@ -92,13 +92,10 @@ router.get('/getShopping', (req, res) => {
 
 router.post('/postShopping', (req, res) => {
 	let shopping = new Shopping();
-	const { id, message } = req.body;
+	const { message } = req.body;
 
-	// validate shopping item
-	// if NOT id AND id is NOT 0 OR NOT message
-	shopping.id = id;
 	shopping.message = message;
-	if ((!id && id !== 0) || !message) {
+	if (!message) {
 		return res.json({ success: false, error: 'INVALID INPUTS' });
 	} else {
 		shopping.save((err) => {

@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const ShoppingList = () => {
-	const [ shoppingList, setShoppinList ] = useState([
-		{
-			id: 1,
-			message: 'gurka'
-		},
-		{
-			id: 2,
-			message: 'tomat'
-		},
-		{
-			id: 3,
-			message: 'mjölk'
+	const [ shoppingList, setShoppinList ] = useState([]);
+
+	useEffect(() => {
+		getShoppingList();
+	}, []);
+
+	const getShoppingList = async () => {
+		try {
+			const res = await axios.get('/api/getShopping');
+
+			setShoppinList(res.data.data);
+		} catch (error) {
+			console.error(error);
 		}
-	]);
+	};
 
 	return (
-		<ul>
-			{shoppingList.map((item) => {
-				return <li key={item.id}>{item.message}</li>;
-			})}
-		</ul>
+		<div>
+			<ul>
+				{shoppingList.map((item) => {
+					return <li key={item._id}>{item.message}</li>;
+				})}
+			</ul>
+		</div>
 	);
 };
 
