@@ -90,6 +90,27 @@ router.get('/getShopping', (req, res) => {
 	});
 });
 
+router.post('/postShopping', (req, res) => {
+	let shopping = new Shopping();
+	const { id, message } = req.body;
+
+	// validate shopping item
+	// if NOT id AND id is NOT 0 OR NOT message
+	shopping.id = id;
+	shopping.message = message;
+	if ((!id && id !== 0) || !message) {
+		return res.json({ success: false, error: 'INVALID INPUTS' });
+	} else {
+		shopping.save((err) => {
+			if (err) {
+				return res.json({ success: false, error: err });
+			} else {
+				return res.json({ success: true, data: data });
+			}
+		});
+	}
+});
+
 // append /api for our http requests
 app.use('/api', router);
 
