@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ShoppingItem from './ShoppingItem';
 
 const ShoppingList = () => {
 	const [ shoppingList, setShoppinList ] = useState([]);
@@ -22,7 +23,7 @@ const ShoppingList = () => {
 		<div>
 			<ul>
 				{shoppingList.map((item) => {
-					return <li key={item._id}>{item.message}</li>;
+					return <ShoppingItem key={item._id} item={item} />;
 				})}
 			</ul>
 		</div>
