@@ -35,13 +35,22 @@ const ShoppingState = (props) => {
 		}
 	};
 
+	const deleteItem = async (id) => {
+		try {
+			await axios.delete(`/api/deleteShopping/${id}`);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	return (
 		<ShoppingContext.Provider
 			value={{
 				shoppingList: state.shoppingList,
 				message: state.message,
 				getShoppingList,
-				addShoppingItem
+				addShoppingItem,
+				deleteItem
 			}}
 		>
 			{props.children}

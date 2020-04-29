@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ShoppingContext from '../../context/shopping/shoppingContext';
 import axios from 'axios';
 
 const ShoppingItem = ({ item }) => {
-	const deleteItem = async (id) => {
-		try {
-			await axios.delete(`/api/deleteShopping/${id}`);
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	const shoppingContext = useContext(ShoppingContext);
+	const { deleteItem } = shoppingContext;
+
 	const updateItem = async (id, message) => {
 		try {
 			await axios.put(`/api/putShopping/${id}`, 'brakare');
