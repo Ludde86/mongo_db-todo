@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import TodoForm from './components/todo/TodoForm';
-import TodoList from './components/todo/TodoList';
 import TodoState from './context/todo/TodoState';
 
 import './App.css';

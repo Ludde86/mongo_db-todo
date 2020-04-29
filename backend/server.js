@@ -4,6 +4,7 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./data');
+const Shopping = require('./shopping');
 
 const API_PORT = 3001;
 const app = express();
@@ -58,7 +59,7 @@ router.delete('/deleteData', (req, res) => {
 	});
 });
 
-// this is our create methid
+// this is our create method
 // this method adds new data in our database
 router.post('/putData', (req, res) => {
 	let data = new Data();
@@ -77,6 +78,54 @@ router.post('/putData', (req, res) => {
 		if (err) return res.json({ success: false, error: err });
 		return res.json({ success: true });
 	});
+});
+
+router.get('/getShopping', (req, res) => {
+	Shopping.find((err, data) => {
+		if (err) {
+			return res.json({ success: false, error: err });
+		} else {
+			return res.json({ success: true, data: data });
+		}
+	});
+});
+
+router.post('/postShopping', (req, res) => {
+	let shopping = new Shopping();
+	const { message } = req.body;
+
+	shopping.message = message;
+	if (!message) {
+		return res.json({ success: false, error: 'INVALID INPUTS' });
+	} else {
+		shopping.save((err, data) => {
+			if (err) {
+				return res.json({ success: false, error: err });
+			} else {
+				return res.json({ success: true, data: data });
+			}
+		});
+	}
+});
+
+router.delete('/deleteShopping/:id', async (req, res) => {
+	// let shopping = await Shopping.findById(req.params.id);
+	console.log(req.params.id);
+	await Shopping.findByIdAndRemove(req.params.id, (err) => {
+		if (err) {
+			return res.send(err);
+		} else {
+			return res.json({ success: true });
+		}
+	});
+
+	// Shopping.findByIdAndRemove(res._id, (err) => {
+	// 	if (err) {
+	// 		return res.send(err);
+	// 	} else {
+	// 		return res.json({ success: true });
+	// 	}
+	// });
 });
 
 // append /api for our http requests
