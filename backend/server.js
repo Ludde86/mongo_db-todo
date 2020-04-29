@@ -109,8 +109,6 @@ router.post('/postShopping', (req, res) => {
 });
 
 router.delete('/deleteShopping/:id', async (req, res) => {
-	// let shopping = await Shopping.findById(req.params.id);
-	console.log(req.params.id);
 	await Shopping.findByIdAndRemove(req.params.id, (err) => {
 		if (err) {
 			return res.send(err);
@@ -118,14 +116,21 @@ router.delete('/deleteShopping/:id', async (req, res) => {
 			return res.json({ success: true });
 		}
 	});
+});
 
-	// Shopping.findByIdAndRemove(res._id, (err) => {
-	// 	if (err) {
-	// 		return res.send(err);
-	// 	} else {
-	// 		return res.json({ success: true });
-	// 	}
-	// });
+router.put('/putShopping/:id', async (req, res) => {
+	try {
+		let shopping = await Shopping.findById(req.params.id);
+		const { message } = shopping;
+
+		// TODO - set the message to the updated message
+		shopping = await Shopping.findByIdAndUpdate(req.params.id, { message: message });
+
+		// send back to client the updated contact (TODO - check if needed)
+		res.json(shopping);
+	} catch (error) {
+		console.error(error);
+	}
 });
 
 // append /api for our http requests
