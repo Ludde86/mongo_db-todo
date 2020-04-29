@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import ShoppingContext from './shoppingContext';
+import { SET_SHOPPINGLIST } from '../types';
 
 const shoppingState = (props) => {
 	const initialState = () => {
@@ -11,11 +12,19 @@ const shoppingState = (props) => {
 
 	const [ state, dispatch ] = useReducer(shoppingReducer, initialState);
 
+	const setShoppingList = (data) => {
+		dispatch({
+			type: SET_SHOPPINGLIST,
+			payload: data
+		});
+	};
+
 	return (
 		<ShoppingContext.Provider
 			value={{
 				shoppingList: state.shoppingList,
-				message: state.message
+				message: state.message,
+				setShoppingList
 			}}
 		>
 			{props.children}

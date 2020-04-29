@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import ShoppingContext from '../../context/shopping/shoppingContext';
 import axios from 'axios';
 import ShoppingItem from './ShoppingItem';
 
 const ShoppingList = () => {
 	const [ shoppingList, setShoppinList ] = useState([]);
+
+	const shoppingContext = useContext(ShoppingContext);
+	const { shoppingList } = shoppingContext;
 
 	useEffect(() => {
 		getShoppingList();
