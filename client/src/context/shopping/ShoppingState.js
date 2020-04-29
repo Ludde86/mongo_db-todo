@@ -2,12 +2,11 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import ShoppingContext from './shoppingContext';
 import shoppingReducer from './shoppingReducer';
-import { GET_SHOPPINGLIST } from '../types';
+import { GET_SHOPPINGLIST, ADD_SHOPPINGITEM } from '../types';
 
 const ShoppingState = (props) => {
 	const initialState = {
-		shoppingList: [],
-		message: ''
+		shoppingList: []
 	};
 
 	const [ state, dispatch ] = useReducer(shoppingReducer, initialState);
@@ -24,12 +23,25 @@ const ShoppingState = (props) => {
 		}
 	};
 
+	const addShoppingItem = async (message) => {
+		try {
+			const res = await axios.post('/api/postShopping', { message: message });
+			dispatch({
+				type: ADD_SHOPPINGITEM,
+				payload: res
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	return (
 		<ShoppingContext.Provider
 			value={{
 				shoppingList: state.shoppingList,
 				message: state.message,
-				getShoppingList
+				getShoppingList,
+				addShoppingItem
 			}}
 		>
 			{props.children}

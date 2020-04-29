@@ -1,4 +1,4 @@
-import { GET_SHOPPINGLIST } from '../types';
+import { GET_SHOPPINGLIST, ADD_SHOPPINGITEM } from '../types';
 
 export default (state, action) => {
 	switch (action.type) {
@@ -6,6 +6,11 @@ export default (state, action) => {
 			return {
 				...state,
 				shoppingList: action.payload
+			};
+		case ADD_SHOPPINGITEM:
+			return {
+				...state,
+				shoppingList: [ ...state, action.payload ]
 			};
 		default:
 			return state;
