@@ -8,6 +8,7 @@ import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import Start from './components/pages/Start';
 import Shopping from './components/pages/Shopping';
+import ShoppingState from './context/shopping/ShoppingState';
 
 const App = () => {
 	return (
@@ -17,11 +18,13 @@ const App = () => {
 			</div>
 			<div className="app-container">
 				<TodoState>
-					<Switch>
-						<Route exact path="/" component={Start} />
-						<Route exact path="/home" component={Home} />
-						<Route exact path="/shopping" component={Shopping} />
-					</Switch>
+					<ShoppingState>
+						<Switch>
+							<Route exact path="/" component={Start} />
+							<Route exact path="/home" component={Home} />
+							<Route exact path="/shopping" component={Shopping} />
+						</Switch>
+					</ShoppingState>
 				</TodoState>
 			</div>
 		</Router>

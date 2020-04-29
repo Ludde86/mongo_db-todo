@@ -10,4 +10,4 @@ export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 export const SET_TRUE = 'SET_TRUE';
 export const SET_FALSE = 'SET_FALSE';
 
-export const SET_SHOPPINGLIST = 'SET_SHOPPINGLIST';
+export const GET_SHOPPINGLIST = 'GET_SHOPPINGLIST';

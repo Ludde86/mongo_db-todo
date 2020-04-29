@@ -1,22 +1,27 @@
 import React, { useReducer } from 'react';
+import axios from 'axios';
 import ShoppingContext from './shoppingContext';
-import { SET_SHOPPINGLIST } from '../types';
+import shoppingReducer from './shoppingReducer';
+import { GET_SHOPPINGLIST } from '../types';
 
-const shoppingState = (props) => {
-	const initialState = () => {
-		state = {
-			shoppingList: [],
-			message: ''
-		};
+const ShoppingState = (props) => {
+	const initialState = {
+		shoppingList: [],
+		message: ''
 	};
 
 	const [ state, dispatch ] = useReducer(shoppingReducer, initialState);
 
-	const setShoppingList = (data) => {
-		dispatch({
-			type: SET_SHOPPINGLIST,
-			payload: data
-		});
+	const getShoppingList = async (data) => {
+		try {
+			const res = await axios.get('/api/getShopping');
+			dispatch({
+				type: GET_SHOPPINGLIST,
+				payload: res.data.data
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (
@@ -24,7 +29,7 @@ const shoppingState = (props) => {
 			value={{
 				shoppingList: state.shoppingList,
 				message: state.message,
-				setShoppingList
+				getShoppingList
 			}}
 		>
 			{props.children}
@@ -32,4 +37,4 @@ const shoppingState = (props) => {
 	);
 };
 
-export default shoppingState;
+export default ShoppingState;

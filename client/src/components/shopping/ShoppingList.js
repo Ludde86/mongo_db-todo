@@ -1,28 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import ShoppingContext from '../../context/shopping/shoppingContext';
-import axios from 'axios';
 import ShoppingItem from './ShoppingItem';
 
 const ShoppingList = () => {
-	const [ shoppingList, setShoppinList ] = useState([]);
-
 	const shoppingContext = useContext(ShoppingContext);
-	const { shoppingList } = shoppingContext;
+	const { shoppingList, getShoppingList } = shoppingContext;
 
-	useEffect(() => {
-		getShoppingList();
-		setInterval(getShoppingList, 1000);
-	}, []);
-
-	const getShoppingList = async () => {
-		try {
-			const res = await axios.get('/api/getShopping');
-
-			setShoppinList(res.data.data);
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	useEffect(
+		() => {
+			getShoppingList();
+			setInterval(getShoppingList, 1000);
+		},
+		// eslint-disable-next-line
+		[]
+	);
 
 	return (
 		<div>
