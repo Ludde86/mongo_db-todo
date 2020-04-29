@@ -98,7 +98,7 @@ router.post('/postShopping', (req, res) => {
 	if (!message) {
 		return res.json({ success: false, error: 'INVALID INPUTS' });
 	} else {
-		shopping.save((err) => {
+		shopping.save((err, data) => {
 			if (err) {
 				return res.json({ success: false, error: err });
 			} else {
@@ -106,6 +106,26 @@ router.post('/postShopping', (req, res) => {
 			}
 		});
 	}
+});
+
+router.delete('/deleteShopping/:id', async (req, res) => {
+	// let shopping = await Shopping.findById(req.params.id);
+	console.log(req.params.id);
+	await Shopping.findByIdAndRemove(req.params.id, (err) => {
+		if (err) {
+			return res.send(err);
+		} else {
+			return res.json({ success: true });
+		}
+	});
+
+	// Shopping.findByIdAndRemove(res._id, (err) => {
+	// 	if (err) {
+	// 		return res.send(err);
+	// 	} else {
+	// 		return res.json({ success: true });
+	// 	}
+	// });
 });
 
 // append /api for our http requests

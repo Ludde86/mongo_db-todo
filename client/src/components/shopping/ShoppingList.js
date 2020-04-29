@@ -7,6 +7,7 @@ const ShoppingList = () => {
 
 	useEffect(() => {
 		getShoppingList();
+		setInterval(getShoppingList, 1000);
 	}, []);
 
 	const getShoppingList = async () => {
