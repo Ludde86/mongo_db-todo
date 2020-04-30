@@ -9,3 +9,8 @@ export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
 export const SET_TRUE = 'SET_TRUE';
 export const SET_FALSE = 'SET_FALSE';
+
+export const GET_SHOPPINGLIST = 'GET_SHOPPINGLIST';
+export const ADD_SHOPPINGITEM = 'ADD_SHOPPINGITEM';
+export const DELETE_ITEM = 'DELETE_ITEM';
+export const EDIT_MESSAGE = 'EDIT_MESSAGE';
