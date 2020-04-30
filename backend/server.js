@@ -120,14 +120,11 @@ router.delete('/deleteShopping/:id', async (req, res) => {
 
 router.put('/putShopping/:id', async (req, res) => {
 	try {
-		let shopping = await Shopping.findById(req.params.id);
-		const { message } = shopping;
+		// in put request, we pass this updated message
+		const { update } = req.body;
 
-		// TODO - set the message to the updated message
-		shopping = await Shopping.findByIdAndUpdate(req.params.id, { message: message });
-
-		// send back to client the updated contact (TODO - check if needed)
-		res.json(shopping);
+		await Shopping.findByIdAndUpdate(req.params.id, { message: update.message });
+		res.json({ success: true });
 	} catch (error) {
 		console.error(error);
 	}

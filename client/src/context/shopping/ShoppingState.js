@@ -1,15 +1,19 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import ShoppingContext from './shoppingContext';
 import shoppingReducer from './shoppingReducer';
-import { GET_SHOPPINGLIST, ADD_SHOPPINGITEM } from '../types';
+import { GET_SHOPPINGLIST, ADD_SHOPPINGITEM, EDIT_MESSAGE } from '../types';
+import TodoContext from '../todo/todoContext';
 
 const ShoppingState = (props) => {
 	const initialState = {
-		shoppingList: []
+		shoppingList: [],
+		editItem: { id: '', message: '' }
 	};
 
 	const [ state, dispatch ] = useReducer(shoppingReducer, initialState);
+	const todoContext = useContext(TodoContext);
+	const { setTrue } = todoContext;
 
 	const getShoppingList = async (data) => {
 		try {
@@ -43,14 +47,33 @@ const ShoppingState = (props) => {
 		}
 	};
 
+	const updateItem = async (id, message) => {
+		try {
+			await axios.put(`/api/putShopping/${id}`, { update: { message: message } });
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const setEditItem = (id, message) => {
+		setTrue();
+		dispatch({
+			type: EDIT_MESSAGE,
+			payload: { id, message }
+		});
+	};
+
 	return (
 		<ShoppingContext.Provider
 			value={{
 				shoppingList: state.shoppingList,
 				message: state.message,
+				editItem: state.editItem,
 				getShoppingList,
 				addShoppingItem,
-				deleteItem
+				deleteItem,
+				updateItem,
+				setEditItem
 			}}
 		>
 			{props.children}
