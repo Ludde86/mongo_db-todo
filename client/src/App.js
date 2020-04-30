@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import TodoState from './context/todo/TodoState';
 
 import './App.css';
+import './components/shopping/Shopping.css';
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import Start from './components/pages/Start';

@@ -4,8 +4,8 @@ import ShoppingList from '../shopping/ShoppingList';
 
 const Shopping = () => {
 	return (
-		<div>
-			<h1>Shopping List</h1>
+		<div className="shopping-container">
+			<h3 className="shopping-title">Shopping List</h3>
 			<ShoppingForm />
 			<ShoppingList />
 		</div>
