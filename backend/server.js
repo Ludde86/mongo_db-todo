@@ -123,7 +123,7 @@ router.put('/putShopping/:id', async (req, res) => {
 		// in put request, we pass this updated message
 		const { update } = req.body;
 
-		await Shopping.findByIdAndUpdate(req.params.id, { message: update.message });
+		await Shopping.findByIdAndUpdate(req.params.id, { message: update });
 		res.json({ success: true });
 	} catch (error) {
 		console.error(error);

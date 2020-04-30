@@ -49,7 +49,7 @@ const ShoppingState = (props) => {
 
 	const updateItem = async (id, message) => {
 		try {
-			await axios.put(`/api/putShopping/${id}`, { update: { message: message } });
+			await axios.put(`/api/putShopping/${id}`, { update: message });
 		} catch (error) {
 			console.error(error);
 		}
