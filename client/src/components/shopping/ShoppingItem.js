@@ -7,11 +7,14 @@ const ShoppingItem = ({ item }) => {
 	const { deleteItem, setEditItem } = shoppingContext;
 
 	return (
-		<div>
-			<li>{item.message}</li>
-			<button onClick={() => deleteItem(item._id)}>Delete</button>
-			<button onClick={() => setEditItem(item._id, item.message)}>Edit</button>
-		</div>
+		<li className="item-container">
+			<span className="item-message">{item.message}</span>
+
+			<span className="item-buttons">
+				<button onClick={() => deleteItem(item._id)}>Ta bort</button>
+				<button onClick={() => setEditItem(item._id, item.message)}>Ändra</button>
+			</span>
+		</li>
 	);
 };
 

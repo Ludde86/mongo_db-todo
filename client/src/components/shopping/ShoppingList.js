@@ -16,13 +16,11 @@ const ShoppingList = () => {
 	);
 
 	return (
-		<div>
-			<ul>
-				{shoppingList.map((item) => {
-					return <ShoppingItem key={item._id} item={item} />;
-				})}
-			</ul>
-		</div>
+		<ul className="list-container">
+			{shoppingList.map((item) => {
+				return <ShoppingItem key={item._id} item={item} />;
+			})}
+		</ul>
 	);
 };
 
