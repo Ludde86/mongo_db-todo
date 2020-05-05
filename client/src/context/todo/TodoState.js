@@ -43,7 +43,7 @@ const TodoState = (props) => {
 			++idToBeAdded;
 		}
 
-		axios.post('/api/putData', {
+		axios.post('http://localhost:3001/api/putData', {
 			id: idToBeAdded,
 			message: message
 		});
@@ -57,7 +57,7 @@ const TodoState = (props) => {
 			}
 		});
 
-		axios.delete('/api/deleteData', {
+		axios.delete('http://localhost:3001/api/deleteData', {
 			data: {
 				id: objIdToDelete
 			}
@@ -73,7 +73,7 @@ const TodoState = (props) => {
 			}
 		});
 
-		axios.post('/api/updateData', {
+		axios.post('http://localhost:3001/api/updateData', {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
