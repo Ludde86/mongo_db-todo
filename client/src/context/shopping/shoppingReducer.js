@@ -10,7 +10,7 @@ export default (state, action) => {
 		case ADD_SHOPPINGITEM:
 			return {
 				...state,
-				shoppingList: [ ...state, action.payload ]
+				shoppingList: [ ...state.shoppingList, action.payload ]
 			};
 		case EDIT_MESSAGE:
 			return {

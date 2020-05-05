@@ -36,7 +36,7 @@ export default (state, action) => {
 		case CLEAR_MESSAGE:
 			return {
 				...state,
-				objectToUpdate: action.payload
+				message: action.payload
 			};
 		case SET_ID:
 			return {

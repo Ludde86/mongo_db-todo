@@ -13,7 +13,7 @@ const ShoppingState = (props) => {
 
 	const [ state, dispatch ] = useReducer(shoppingReducer, initialState);
 	const todoContext = useContext(TodoContext);
-	const { setTrue, setFalse } = todoContext;
+	const { setTrue, setFalse, clearMessage } = todoContext;
 
 	const getShoppingList = async (data) => {
 		try {
@@ -35,6 +35,7 @@ const ShoppingState = (props) => {
 				type: ADD_SHOPPINGITEM,
 				payload: res
 			});
+			clearMessage();
 		} catch (error) {
 			console.error(error);
 		}
@@ -53,6 +54,7 @@ const ShoppingState = (props) => {
 			e.preventDefault();
 			await axios.put(`http://localhost:3001/api/putShopping/${id}`, { update: message });
 			setFalse();
+			clearMessage();
 		} catch (error) {
 			console.error(error);
 		}

@@ -8,7 +8,7 @@ import {
 	SET_INTERVAL,
 	SET_MESSAGE,
 	UPDATE_MESSAGE,
-	// CLEAR_MESSAGE,
+	CLEAR_MESSAGE,
 	SET_ID,
 	SET_TRUE,
 	SET_FALSE
@@ -48,6 +48,7 @@ const TodoState = (props) => {
 			id: idToBeAdded,
 			message: message
 		});
+		clearMessage();
 	};
 
 	const deleteFromDB = (idTodelete) => {
@@ -67,7 +68,7 @@ const TodoState = (props) => {
 
 	const updateDB = (e, idToUpdate, objectToUpdate) => {
 		e.preventDefault();
-		setTrue();
+
 		let objIdToUpdate = null;
 		todos.forEach((todo) => {
 			if (todo.id === idToUpdate) {
@@ -80,9 +81,6 @@ const TodoState = (props) => {
 			update: { message: objectToUpdate }
 		});
 		setFalse();
-		// if (objectToUpdate !== '') {
-		// 	clearMessage();
-		// }
 	};
 
 	const setIntervalIsSet = (interval) => {
@@ -114,12 +112,12 @@ const TodoState = (props) => {
 		});
 	};
 
-	// const clearMessage = () => {
-	// 	dispatch({
-	// 		type: CLEAR_MESSAGE,
-	// 		payload: ''
-	// 	});
-	// };
+	const clearMessage = () => {
+		dispatch({
+			type: CLEAR_MESSAGE,
+			payload: ''
+		});
+	};
 
 	const setTrue = () => {
 		dispatch({
@@ -153,7 +151,8 @@ const TodoState = (props) => {
 				setIdToUpdate,
 				setIntervalIsSet,
 				setTrue,
-				setFalse
+				setFalse,
+				clearMessage
 			}}
 		>
 			{props.children}
