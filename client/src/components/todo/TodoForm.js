@@ -17,7 +17,7 @@ const TodoForm = () => {
 	return (
 		<div className="todo-form-container">
 			{isEdit ? (
-				<form onSubmit={() => updateDB(idToUpdate, objectToUpdate)}>
+				<form onSubmit={(e) => updateDB(e, idToUpdate, objectToUpdate)}>
 					<input
 						type="text"
 						onChange={(e) => setObjectToUpdate(idToUpdate, e.target.value)}
@@ -28,7 +28,7 @@ const TodoForm = () => {
 					<input type="submit" value="Uppdatera" />
 				</form>
 			) : (
-				<form onSubmit={() => putDataToDB(message)}>
+				<form onSubmit={(e) => putDataToDB(e, message)}>
 					<input
 						type="text"
 						onChange={(e) => setMessage(e.target.value)}

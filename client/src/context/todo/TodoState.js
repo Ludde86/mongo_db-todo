@@ -36,7 +36,8 @@ const TodoState = (props) => {
 		);
 	};
 
-	const putDataToDB = (message) => {
+	const putDataToDB = (e, message) => {
+		e.preventDefault();
 		let currentIds = todos.map((todo) => todo.id);
 		let idToBeAdded = 0;
 		while (currentIds.includes(idToBeAdded)) {
@@ -64,7 +65,8 @@ const TodoState = (props) => {
 		});
 	};
 
-	const updateDB = (idToUpdate, objectToUpdate) => {
+	const updateDB = (e, idToUpdate, objectToUpdate) => {
+		e.preventDefault();
 		setTrue();
 		let objIdToUpdate = null;
 		todos.forEach((todo) => {
