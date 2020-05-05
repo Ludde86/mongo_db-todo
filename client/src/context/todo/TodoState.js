@@ -28,7 +28,7 @@ const TodoState = (props) => {
 	const { todos } = state;
 
 	const getDataFromDb = () => {
-		fetch('http://localhost:3001/api/getData').then((todos) => todos.json()).then((res) =>
+		fetch('https://peaceful-journey-03079.herokuapp.com/api/getData').then((todos) => todos.json()).then((res) =>
 			dispatch({
 				type: GET_DATA,
 				payload: res.data
@@ -44,7 +44,7 @@ const TodoState = (props) => {
 			++idToBeAdded;
 		}
 
-		axios.post('http://localhost:3001/api/putData', {
+		axios.post('https://peaceful-journey-03079.herokuapp.com/api/putData', {
 			id: idToBeAdded,
 			message: message
 		});
@@ -59,7 +59,7 @@ const TodoState = (props) => {
 			}
 		});
 
-		axios.delete('http://localhost:3001/api/deleteData', {
+		axios.delete('https://peaceful-journey-03079.herokuapp.com/api/deleteData', {
 			data: {
 				id: objIdToDelete
 			}
@@ -76,7 +76,7 @@ const TodoState = (props) => {
 			}
 		});
 
-		axios.post('http://localhost:3001/api/updateData', {
+		axios.post('https://peaceful-journey-03079.herokuapp.com/api/updateData', {
 			id: objIdToUpdate,
 			update: { message: objectToUpdate }
 		});
