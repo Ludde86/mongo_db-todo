@@ -28,8 +28,8 @@ const ShoppingState = (props) => {
 	};
 
 	const addShoppingItem = async (e, message) => {
-		e.preventDefault();
 		try {
+			e.preventDefault();
 			const res = await axios.post('http://localhost:3001/api/postShopping', { message: message });
 			dispatch({
 				type: ADD_SHOPPINGITEM,
@@ -49,8 +49,8 @@ const ShoppingState = (props) => {
 	};
 
 	const updateItem = async (e, id, message) => {
-		e.preventDefault();
 		try {
+			e.preventDefault();
 			await axios.put(`http://localhost:3001/api/putShopping/${id}`, { update: message });
 		} catch (error) {
 			console.error(error);
