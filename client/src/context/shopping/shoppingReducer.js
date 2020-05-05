@@ -15,7 +15,8 @@ export default (state, action) => {
 		case EDIT_MESSAGE:
 			return {
 				...state,
-				editItem: action.payload
+				editItem: action.payload,
+				isEdit: true
 			};
 		default:
 			return state;
