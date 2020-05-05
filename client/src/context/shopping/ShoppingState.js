@@ -27,7 +27,8 @@ const ShoppingState = (props) => {
 		}
 	};
 
-	const addShoppingItem = async (message) => {
+	const addShoppingItem = async (e, message) => {
+		e.preventDefault();
 		try {
 			const res = await axios.post('http://localhost:3001/api/postShopping', { message: message });
 			dispatch({
@@ -47,7 +48,8 @@ const ShoppingState = (props) => {
 		}
 	};
 
-	const updateItem = async (id, message) => {
+	const updateItem = async (e, id, message) => {
+		e.preventDefault();
 		try {
 			await axios.put(`http://localhost:3001/api/putShopping/${id}`, { update: message });
 		} catch (error) {
