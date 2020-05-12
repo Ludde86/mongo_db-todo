@@ -28,7 +28,8 @@ const TodoState = (props) => {
 	const { todos } = state;
 
 	const getDataFromDb = () => {
-		const url = 'https://peaceful-journey-03079.herokuapp.com/api/getData'; // site that doesn’t send Access-Control-*
+		// const proxyUrl = 'http://peaceful-journey-03079.herokuapp.com';
+		const url = 'http://peaceful-journey-03079.herokuapp.com/api/getData'; // site that doesn’t send Access-Control-*
 		fetch(url)
 			.then((todos) => todos.json())
 			.then((res) =>
