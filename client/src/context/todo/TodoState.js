@@ -28,12 +28,16 @@ const TodoState = (props) => {
 	const { todos } = state;
 
 	const getDataFromDb = () => {
-		fetch('https://peaceful-journey-03079.herokuapp.com/api/getData').then((todos) => todos.json()).then((res) =>
-			dispatch({
-				type: GET_DATA,
-				payload: res.data
-			})
-		);
+		const url = 'https://peaceful-journey-03079.herokuapp.com/api/getData'; // site that doesn’t send Access-Control-*
+		fetch(url)
+			.then((todos) => todos.json())
+			.then((res) =>
+				dispatch({
+					type: GET_DATA,
+					payload: res.data
+				})
+			)
+			.catch(() => console.log('Can’t access ' + url + ' response. Blocked by browser?'));
 	};
 
 	const putDataToDB = (e, message) => {
