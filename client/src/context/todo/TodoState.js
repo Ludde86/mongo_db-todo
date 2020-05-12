@@ -31,7 +31,7 @@ const TodoState = (props) => {
 		// const production = 'https://peaceful-journey-03079.herokuapp.com/api/getData';
 		// const development = 'http://localhost:3001/api/getData';
 		// const url = process.env.NODE_ENV ? production : development;
-		fetch('/getData', { method: 'GET' }).then((todos) => todos.json()).then((res) =>
+		fetch('/api/getData', { method: 'GET' }).then((todos) => todos.json()).then((res) =>
 			dispatch({
 				type: GET_DATA,
 				payload: res.data
