@@ -35,7 +35,7 @@ const TodoState = (props) => {
 			dispatch({
 				type: GET_DATA,
 				payload: res.data
-			}).then(console.log(res))
+			})
 		);
 	};
 
