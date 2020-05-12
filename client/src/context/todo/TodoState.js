@@ -28,14 +28,14 @@ const TodoState = (props) => {
 	const { todos } = state;
 
 	const getDataFromDb = () => {
-		const production = 'https://peaceful-journey-03079.herokuapp.com/api/getData';
-		const development = 'http://localhost:3001/api/getData';
-		const url = process.env.NODE_ENV ? production : development;
-		fetch('http://localhost:3001/api/getData').then((todos) => todos.json()).then((res) =>
+		// const production = 'https://peaceful-journey-03079.herokuapp.com/api/getData';
+		// const development = 'http://localhost:3001/api/getData';
+		// const url = process.env.NODE_ENV ? production : development;
+		fetch('/getData', { method: 'GET' }).then((todos) => todos.json()).then((res) =>
 			dispatch({
 				type: GET_DATA,
 				payload: res.data
-			})
+			}).then(console.log(res))
 		);
 	};
 
