@@ -28,12 +28,14 @@ const TodoState = (props) => {
 	const { todos } = state;
 
 	const getDataFromDb = () => {
-		fetch('http://localhost:3001/api/getData').then((todos) => todos.json()).then((res) =>
-			dispatch({
-				type: GET_DATA,
-				payload: res.data
-			})
-		);
+		fetch('https://peaceful-journey-03079.herokuapp.com:3001/api/getData')
+			.then((todos) => todos.json())
+			.then((res) =>
+				dispatch({
+					type: GET_DATA,
+					payload: res.data
+				})
+			);
 	};
 
 	const putDataToDB = (e, message) => {
