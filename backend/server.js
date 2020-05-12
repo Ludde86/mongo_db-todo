@@ -5,7 +5,7 @@ const logger = require('morgan');
 const Data = require('./data');
 const Shopping = require('./shopping');
 
-const API_PORT = process.env.PORT || 3001;
+const API_PORT = 3001;
 const app = express();
 var cors = require('cors');
 app.use(cors());
@@ -30,13 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
-
-// Handles any requests that don't match the ones above
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
+// // Serve the static files from the React app
+// app.use(express.static(path.join(__dirname, 'client/build')));
 
 // this is our get method
 // this method fetches all available data in our database
@@ -140,6 +135,11 @@ router.put('/putShopping/:id', async (req, res) => {
 
 // append /api for our http requests
 app.use('/api', router);
+
+// // Handles any requests that don't match the ones above
+// app.get('*', (req, res) => {
+// 	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+// });
 
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
