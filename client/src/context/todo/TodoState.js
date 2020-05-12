@@ -28,7 +28,7 @@ const TodoState = (props) => {
 	const { todos } = state;
 
 	const getDataFromDb = () => {
-		fetch('http://192.168.1.52/api/getData').then((todos) => todos.json()).then((res) =>
+		fetch('http://localhost:3001/api/getData').then((todos) => todos.json()).then((res) =>
 			dispatch({
 				type: GET_DATA,
 				payload: res.data
