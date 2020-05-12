@@ -28,17 +28,12 @@ const TodoState = (props) => {
 	const { todos } = state;
 
 	const getDataFromDb = () => {
-		// const proxyUrl = 'http://peaceful-journey-03079.herokuapp.com';
-		const url = 'http://peaceful-journey-03079.herokuapp.com/api/getData'; // site that doesn’t send Access-Control-*
-		fetch(url)
-			.then((todos) => todos.json())
-			.then((res) =>
-				dispatch({
-					type: GET_DATA,
-					payload: res.data
-				})
-			)
-			.catch(() => console.log('Can’t access ' + url + ' response. Blocked by browser?'));
+		fetch('http://localhost:3001/api/getData').then((todos) => todos.json()).then((res) =>
+			dispatch({
+				type: GET_DATA,
+				payload: res.data
+			})
+		);
 	};
 
 	const putDataToDB = (e, message) => {
@@ -49,7 +44,7 @@ const TodoState = (props) => {
 			++idToBeAdded;
 		}
 
-		axios.post('https://peaceful-journey-03079.herokuapp.com/api/putData', {
+		axios.post('http://localhost:3001/api/putData', {
 			id: idToBeAdded,
 			message: message
 		});
