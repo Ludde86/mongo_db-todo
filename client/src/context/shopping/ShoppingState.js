@@ -17,7 +17,7 @@ const ShoppingState = (props) => {
 
 	const getShoppingList = async (data) => {
 		try {
-			const res = await axios.get('/getShopping');
+			const res = await axios.get('/api/getShopping');
 			dispatch({
 				type: GET_SHOPPINGLIST,
 				payload: res.data.data
@@ -30,7 +30,7 @@ const ShoppingState = (props) => {
 	const addShoppingItem = async (e, message) => {
 		try {
 			e.preventDefault();
-			const res = await axios.post('/postShopping', { message: message });
+			const res = await axios.post('/api/postShopping', { message: message });
 			dispatch({
 				type: ADD_SHOPPINGITEM,
 				payload: res
@@ -43,7 +43,7 @@ const ShoppingState = (props) => {
 
 	const deleteItem = async (id) => {
 		try {
-			await axios.delete(`/deleteShopping/${id}`);
+			await axios.delete(`/api/deleteShopping/${id}`);
 		} catch (error) {
 			console.error(error);
 		}
@@ -52,7 +52,7 @@ const ShoppingState = (props) => {
 	const updateItem = async (e, id, message) => {
 		try {
 			e.preventDefault();
-			await axios.put(`/putShopping/${id}`, { update: message });
+			await axios.put(`/api/putShopping/${id}`, { update: message });
 			setFalse();
 			clearMessage();
 		} catch (error) {

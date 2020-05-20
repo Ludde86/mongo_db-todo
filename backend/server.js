@@ -34,6 +34,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
+// append /api for our http requests
+app.use('/api', router);
 
 // Serve the static files from the React app
 if (process.env.NODE_ENV === 'production') {
@@ -144,9 +146,6 @@ router.put('/putShopping/:id', async (req, res) => {
 		console.error(error);
 	}
 });
-
-// append /api for our http requests
-app.use('/api', router);
 
 // // Handles any requests that don't match the ones above
 // app.get('/', (req, res) => {
