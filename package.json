@@ -9,7 +9,8 @@
 		"heroku-postbuild": "npm run install-client && npm run build",
 		"start": "cd backend && node server.js",
 		"client": "cd client && npm start",
-		"dev": "concurrently --names 'server,client' --prefix-colors 'blue,green' \"nodemon server.js\" \"npm run client\""
+		"server": "cd backend && nodemon server.js",
+		"dev": "concurrently --names 'server,client' --prefix-colors 'blue,green' \"npm run server\" \"npm run client\""
 	},
 	"repository": {
 		"type": "git",
