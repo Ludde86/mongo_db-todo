@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // this is our get method
 // this method fetches all available data in our database
-router.get('/api/getData', (req, res) => {
+router.get('/getData', (req, res) => {
 	Data.find((err, data) => {
 		if (err) return res.json({ success: false, error: err });
 		return res.json({ success: true, data: data });
@@ -95,7 +95,7 @@ router.post('/putData', (req, res) => {
 	});
 });
 
-router.get('/api/getShopping', (req, res) => {
+router.get('/getShopping', (req, res) => {
 	Shopping.find((err, data) => {
 		if (err) {
 			return res.json({ success: false, error: err });
